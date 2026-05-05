@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Contact Coverage-Guided Exploration for General-Purpose Dexterous Manipulation">
+  <meta name="keywords" content="Robotics, Dexterous Manipulation, Reinforcement Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    Contact Coverage-Guided Exploration for General-Purpose Dexterous Manipulation
+  </title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QZ38WT2YPD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-QZ38WT2YPD');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js?v=4"></script>
+</head>
+
+<section class="hero hero-banner is-link is-fullheight">
+  <div class="hero-video is-hidden-mobile">
+    <video playsinline autoplay muted loop>
+      <source src=" ./static/videos/teaser_video_real_web.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-video is-hidden-tablet is-inline-block-mobile">
+    <video playsinline autoplay muted loop>
+      <source src=" ./static/videos/teaser_video_web.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="overlay"></div>
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head is-hidden-mobile">
+    <header class="navbar">
+      <div class="container is-size-5">
+        <div class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item pl-4 pr-4" href="./static/ccge.pdf">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/pdf.svg" alt="PDF" />
+              </span>
+              <span>Paper</span>
+            </a>
+            <a class="navbar-item  pl-4 pr-4" href="https://arxiv.org/abs/2603.10971">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/arxiv.svg" alt="ArXiv" />
+              </span>
+              <span>arXiv</span> </a>
+            <a href="https://youtu.be/NfZVJNBX1Uc" class="navbar-item  pl-4 pr-4">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/youtube.svg" alt="Youtube" />
+              </span>
+              <span>Video</span> </a>
+            <a  class="navbar-item  pl-4 pr-4" href="https://github.com/ruoyiqiao/CCGE">
+              <span class="icon" style="margin-right:5px;">
+                <img src="./static/images/github.svg" alt="GitHub" />
+              </span>
+                <span>Code</span> </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Hero content: will be in the middle -->
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 11rem;">
+        ContactExplorer
+      </h1>
+      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 4rem;">
+        Contact Coverage-Guided Exploration
+      </h1>
+      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 4rem;">
+        for General-Purpose Dexterous Manipulation
+      </h1>
+      <div class="is-size-4 publication-authors">
+        <span class="author-block"><a href="https://panda-shawn.github.io/">Zixuan Liu</a><sup>1,2</sup>*</span> and
+        <span class="author-block"><a href="https://github.com/ruoyiqiao">Ruoyi Qiao</a><sup>1,2</sup>*</span>,
+        <span class="author-block"><a href="https://crtie.github.io/">Chenrui Tie</a><sup>1,2</sup></span>,
+        <span class="author-block"><a href="https://github.com/Evan-XLiu">Xuanwei Liu</a><sup>1</sup></span>,
+        <span class="author-block"><a href="https://github.com/LYFCLOUDFAN">Yunfan Lou</a><sup>1</sup></span>,
+        <span class="author-block"><a href="https://chongkaigao.com/">Chongkai Gao</a><sup>1,2</sup></span>,
+        <span class="author-block"><a href="https://ariszxxu.github.io/">Zhixuan Xu</a><sup>1,2</sup></span>,
+        <span class="author-block"><a href="https://linsats.github.io/">Lin Shao</a><sup>1,2,&dagger;</sup></span>
+      </div>
+      <div class="is-size-5 publication-authors">
+        <span class="author-block"><sup>1</sup> School of Computing, National University of Singapore</span><br>
+        <span class="author-block"><sup>2</sup> RoboScience</span><br>
+      </div>
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">*</span> Equal contribution; listed in random order.
+        <span class="author-block"><sup>&dagger;</sup> Corresponding author.</span>
+      </div>
+      <!-- <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 2rem; opacity: 80%;">
+        Conference on Robot Learning 2024
+      </h1>
+      <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 1.5rem; opacity: 80%;">
+        <b>Spotlight</b> WCBM Workshop CoRL 2024
+      </h1>
+      <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 1.5rem; opacity: 80%;">
+        X-Embodiment Workshop CoRL 2024
+      </h1> -->
+      <div class="column has-text-centered is-hidden-tablet">
+        <div class="publication-links">
+          <!-- PDF Link. -->
+          <span class="link-block">
+            <a href="./static/ccge.pdf" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/pdf.svg" alt="PDF" />
+              </span>
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://arxiv.org/abs/2603.10971" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/arxiv.svg" alt="ArXiv" />
+              </span>
+              <span>arXiv</span>
+            </a>
+          </span>
+          <!-- Video Link. -->
+          <span class="link-block">
+            <a href="https://youtu.be/NfZVJNBX1Uc" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/youtube.svg" alt="Youtube" />
+              </span>
+              <span>Video</span>
+            </a>
+          </span>
+          <!-- Code Link. -->
+          <span class="link-block">
+            <a href="https://github.com/ruoyiqiao/CCGE" class="external-link button is-normal is-rounded is-dark">
+              <span class="icon">
+                <img src="./static/images/github.svg" alt="GitHub" />
+              </span>
+              <span>Code</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <div class="hero-foot is-hidden-mobile">
+    <nav class="tabs is-boxed is-fullwidth is-size-5">
+      <ul>
+        <li><a href="#motivation">Motivation</a></li>
+        <li><a href="#sim">Simulation Tasks</a></li>
+        <li><a href="#real">Real-World Results</a></li>
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#experiment">Experiment</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+
+
+
+
+<section class="section is-medium" id="motivation">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered is-size-4-mobile">Motivation</h2>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-justified">
+        <p class="content has-text-centered">
+          ContactExplorer is an exploration method for general-purpose dexterous manipulation, which encourages diverse finger-object
+          contact patterns by tracking state-conditioned contact coverage.
+        </p>
+        <div class="publication-video">
+          <video controls preload="metadata">
+            <source src="static/videos/contact_explorer_media/content/ce_motivation.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="sim">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered is-size-4-mobile">Simulation Tasks</h2>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="simulation-mosaic">
+          <div class="simulation-tile">
+            <div class="simulation-media">
+              <video controls preload="metadata">
+                <source src="./static/videos/contact_explorer_media/simulation/leap_sing_web.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="simulation-label">Cluttered Object Singulation</div>
+          </div>
+          <div class="simulation-tile">
+            <div class="simulation-media">
+              <video controls preload="metadata">
+                <source src="./static/videos/contact_explorer_media/simulation/leap_retri_web.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="simulation-label">Constrained Object Retrieval</div>
+          </div>
+          <div class="simulation-tile">
+            <div class="simulation-media">
+              <video controls preload="metadata">
+                <source src="./static/videos/contact_explorer_media/simulation/inhand_elephant_web.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="simulation-label">In-Hand Reorientation (Elephant)</div>
+          </div>
+
+          <div class="simulation-tile">
+            <div class="simulation-media">
+              <video controls preload="metadata">
+                <source src="./static/videos/contact_explorer_media/simulation/inhand_mug_web.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="simulation-label">In-Hand Reorientation (Mug)</div>
+          </div>
+          <div class="simulation-tile">
+            <div class="simulation-media">
+              <video controls preload="metadata">
+                <source src="./static/videos/contact_explorer_media/simulation/bi_waffle_web.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="simulation-label">Bimanual Manipulation (Waffle)</div>
+          </div>
+          <div class="simulation-tile">
+            <div class="simulation-media">
+              <video controls preload="metadata">
+                <source src="./static/videos/contact_explorer_media/simulation/bi_box_web.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="simulation-label">Bimanual Manipulation (Box)</div>
+          </div>
+          <div class="simulation-tile">
+            <div class="simulation-media">
+              <video controls preload="metadata">
+                <source src="./static/videos/contact_explorer_media/simulation/inhand_cube_web.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="simulation-label">In-Hand Reorientation (Cube)</div>
+          </div>
+          <div class="simulation-tile">
+            <div class="simulation-media">
+              <video controls preload="metadata">
+                <source src="./static/videos/contact_explorer_media/simulation/inhand_bunny_web.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="simulation-label">In-Hand Reorientation (Bunny)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section real-world-section" id="real">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered is-size-4-mobile">Real-World Results</h2>
+    <p class="real-world-subtitle has-text-centered">
+      We distill the simulation oracle policy into a vision-based policy and evaluate real-world object singulation with randomized target objects. Videos are shown at 1x speed.
+    </p>
+    <div class="real-world-controls">
+      <span class="real-world-label">Select trial</span>
+      <div class="real-world-buttons" role="group" aria-label="Select trial">
+        <button class="real-world-button is-active" type="button" data-real-trial="success_1">Trial 1</button>
+        <button class="real-world-button" type="button" data-real-trial="success_2">Trial 2</button>
+        <button class="real-world-button" type="button" data-real-trial="success_3">Trial 3</button>
+      </div>
+    </div>
+
+    <div class="real-world-card">
+      <div class="real-world-grid">
+        <figure class="real-world-tile">
+          <div class="real-world-media">
+            <video controls preload="metadata" data-real-world-view="1">
+              <source src="./static/videos/contact_explorer_media/real/success_1/success_1-1_web.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption class="real-world-caption">Global view</figcaption>
+        </figure>
+        <figure class="real-world-tile">
+          <div class="real-world-media">
+            <video style="transform: rotate(180deg);" controls preload="metadata" data-real-world-view="2">
+              <source src="./static/videos/contact_explorer_media/real/success_1/success_1-2_web.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption class="real-world-caption">Top-down view</figcaption>
+        </figure>
+        <figure class="real-world-tile">
+          <div class="real-world-media">
+            <video controls preload="metadata" data-real-world-view="3">
+              <source src="./static/videos/contact_explorer_media/real/success_1/success_1-3_web.mp4" type="video/mp4">
+            </video>
+          </div>
+          <figcaption class="real-world-caption">Side view</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section is-medium" id="abstract">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered is-size-4-mobile">Abstract</h2>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths has-text-justified is-hidden-mobile">
+        <p class="content">
+          Deep Reinforcement Learning (DRL) has achieved remarkable success in domains with well-defined reward structures, such as Atari games and locomotion. In contrast, dexterous manipulation lacks general-purpose reward formulations and typically depends on task-specific, handcrafted priors to guide hand-object interactions. We propose <em>ContactExplorer</em>, a general exploration method designed for general-purpose dexterous manipulation tasks. ContactExplorer represents contact state as the intersection between object surface points and predefined hand keypoints, encouraging dexterous hands to discover diverse and novel contact patterns, namely which fingers contact which object regions. It maintains a contact counter conditioned on discretized object states obtained via learned hash codes, capturing how frequently each finger interacts with different object regions. This counter is leveraged in two complementary ways: (1) to assign a count-based contact coverage reward that promotes exploration of novel contact patterns, and (2) to provide an energy-based reaching reward that guides the agent toward under-explored contact regions. We evaluate ContactExplorer on a diverse set of dexterous manipulation tasks, including cluttered object singulation, constrained object retrieval, in-hand reorientation, and bimanual manipulation. Experimental results show that ContactExplorer substantially improves training efficiency and success rates over existing exploration methods, and that the contact patterns learned with ContactExplorer transfer robustly to real-world robotic systems.
+        </p>
+      </div>
+
+      <div class="column is-four-fifths is-hidden-tablet has-text-justified-mobile">
+        <p>
+          Deep Reinforcement Learning (DRL) has achieved remarkable success in domains with well-defined reward structures, such as Atari games and locomotion. In contrast, dexterous manipulation lacks general-purpose reward formulations and typically depends on task-specific, handcrafted priors to guide hand-object interactions. We propose <em>ContactExplorer</em>, a general exploration method designed for general-purpose dexterous manipulation tasks. ContactExplorer represents contact state as the intersection between object surface points and predefined hand keypoints, encouraging dexterous hands to discover diverse and novel contact patterns, namely which fingers contact which object regions. It maintains a contact counter conditioned on discretized object states obtained via learned hash codes, capturing how frequently each finger interacts with different object regions. This counter is leveraged in two complementary ways: (1) to assign a count-based contact coverage reward that promotes exploration of novel contact patterns, and (2) to provide an energy-based reaching reward that guides the agent toward under-explored contact regions. We evaluate ContactExplorer on a diverse set of dexterous manipulation tasks, including cluttered object singulation, constrained object retrieval, in-hand reorientation, and bimanual manipulation. Experimental results show that ContactExplorer substantially improves training efficiency and success rates over existing exploration methods, and that the contact patterns learned with ContactExplorer transfer robustly to real-world robotic systems.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section is-small" id="method">
+  <div class="container is-max-widescreen">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2 has-text-centered is-size-4-mobile">Method</h2>
+
+        <div class="content">
+          <p>
+            <strong>ContactExplorer</strong> proposes a <strong>contact coverage-guided exploration</strong> method that explicitly models hand-object interactions, consisting of three key components: a <strong>learned state hashing module</strong> that discretizes continuous object states into compact state clusters, a <strong>contact coverage counter</strong> that records state-conditioned finger-region interactions, and a <strong>structured exploration reward</strong>.
+          </p>
+          <p>
+            The exploration reward is further decomposed into a <strong>contact coverage reward</strong>, which encourages exploration of under-explored contact regions after contact occurs, and an <strong>energy-based reaching reward</strong>, which guides the policy to unexplored object regions, facilitating efficient contact discovery before interaction occurs. The current object state and the goal state are visualized as colored point clouds, with colors indicating different object surface regions.
+          </p>
+        </div>
+
+        <div class="columns is-variable is-5 is-vcentered">
+          <div class="column">
+            <figure>
+              <img src="./static/images/contact_explorer_overview_update.png" alt="contact_explorer_overview_update" />
+              <figcaption class="has-text-centered is-size-6">Figure. Overview of ContactExplorer.</figcaption>
+            </figure>
+          </div>
+          <div class="column">
+            <div class="publication-video">
+              <video controls preload="metadata">
+                <source src="static/videos/contact_explorer_media/content/ce_method.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section is-medium" id="experiment">
+  <div class="container is-max-widescreen">
+    <h2 class="title is-2 has-text-centered is-size-4-mobile">Experiment</h2>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="publication-video">
+          <video controls preload="metadata">
+            <source src="static/videos/contact_explorer_media/content/ce_experiment.mp4" type="video/mp4">
+          </video>
+        </div>
+        <figure class="mt-5 mb-5">
+          <img src="./static/images/exp_plot.png" alt="Training curves across tasks" />
+          <figcaption class="has-text-centered is-size-6">Figure. Training curves across tasks.</figcaption>
+        </figure>
+        <div class="content">
+          <p>
+            We compare ContactExplorer, against baselines on a range of challenging manipulation tasks. ContactExplorer shows (i) more stable training across different random seeds, (ii) improved sample efficiency, and (iii) achieves higher task performance overall.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template modified from <a href="https://nerfies.github.io/">NeRFies</a> and <a
+              href="https://umi-on-legs.github.io/">Umi on Legs</a>.
+          </p>
+          <p>
+            This website is licensed under a <a rel="license"
+              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow and modify the <a
+              href="https://github.com/nerfies/nerfies.github.io">source
+              code</a> of this website as long as
+            you link back to the <a href="https://nerfies.github.io/">NeRFies</a> page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+</html>
