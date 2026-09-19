@@ -372,26 +372,42 @@
 
         <div class="content">
           <p>
-            <strong>ContactExplorer</strong> proposes a <strong>contact coverage-guided exploration</strong> method that explicitly models hand-object interactions, consisting of three key components: a <strong>learned state hashing module</strong> that discretizes continuous object states into compact state clusters, a <strong>contact coverage counter</strong> that records state-conditioned finger-region interactions, and a <strong>structured exploration reward</strong>.
-          </p>
-          <p>
-            The exploration reward is further decomposed into a <strong>contact coverage reward</strong>, which encourages exploration of under-explored contact regions after contact occurs, and an <strong>energy-based reaching reward</strong>, which guides the policy to unexplored object regions, facilitating efficient contact discovery before interaction occurs. The current object state and the goal state are visualized as colored point clouds, with colors indicating different object surface regions.
+            Dexterous exploration needs to discover useful physical interactions, but contact is sparse: rewarding contact alone gives the hand no guidance before it touches the object. <strong>ContactExplorer</strong> uses a shared memory of finger–object contacts to guide the hand toward under-explored regions and reward novel interactions when contact occurs.
           </p>
         </div>
 
-        <div class="columns is-variable is-5 is-vcentered">
-          <div class="column">
-            <figure>
-              <img src="./static/images/contact_explorer_overview_update.png" alt="contact_explorer_overview_update" />
-              <figcaption class="has-text-centered is-size-6">Figure. Overview of ContactExplorer.</figcaption>
-            </figure>
-          </div>
-          <div class="column">
-            <div class="publication-video">
-              <video controls preload="metadata">
-                <source src="static/videos/contact_explorer_media/content/ce_method.mp4" type="video/mp4">
-              </video>
-            </div>
+        <figure class="method-overview">
+          <img src="./static/images/ce_overview.png" width="2800" height="1172" alt="ContactExplorer pipeline: learned state hashing indexes a state–finger–region contact counter; the counter supplies energy-based reaching and contact coverage rewards for PPO training." />
+          <figcaption class="has-text-centered is-size-6">Overview of ContactExplorer.</figcaption>
+        </figure>
+
+        <div class="content method-explanation">
+          <h3 class="method-step-title">01 · Define contact: which finger touches which region?</h3>
+          <p>
+            We partition the object surface into regions using point positions and surface normals, and represent each finger with sparse surface keypoints. A distance–force criterion detects contact between a finger and an object region. This gives a concrete unit of exploration: a <strong>finger–region pair</strong>, rather than proximity to the object alone.
+          </p>
+          <h3 class="method-step-title">02 · Measure novelty in the right object state</h3>
+          <p>
+            The same contact may be useful again when the object configuration or goal changes. We therefore encode point clouds of the <strong>current and goal object poses</strong> with an autoencoder, then use SimHash to assign a discrete state cluster. A counter records how often each finger–region pair has been contacted within that cluster. These counts persist across training episodes; rarely visited pairs receive higher novelty weights, while repeated contacts contribute less.
+          </p>
+          <h3 class="method-step-title">03 · Guide reaching, then reward contact</h3>
+          <p>
+            <strong>Before contact:</strong> the energy-based reaching score combines the same novelty weights with a distance-based kernel over object surface points. Nearby, under-explored regions contribute more, providing continuous guidance toward new interactions even while the hand is in free space.
+          </p>
+          <p>
+            <strong>When contact occurs:</strong> the contact coverage score measures the novelty of the finger–region pairs actually touched. Merely approaching the object cannot earn this contact-based signal.
+          </p>
+          <p>
+            For each score, we reward only <strong>improvements over its best value in the current episode</strong>, discouraging repeated exploitation of an already discovered interaction. Both rewards are computed before updating the contact counts, then added to the task reward for PPO training. The episode-best scores reset each episode; the contact memory does not.
+          </p>
+        </div>
+
+        <div class="method-walkthrough">
+          <h3 class="method-step-title">Video walkthrough</h3>
+          <div class="publication-video">
+            <video controls preload="metadata">
+              <source src="static/videos/contact_explorer_media/content/ce_method.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </div>

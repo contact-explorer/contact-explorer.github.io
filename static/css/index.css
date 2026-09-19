@@ -112,6 +112,31 @@ body {
   }
 }
 
+.method-overview {
+  margin: 1.75rem 0 2.5rem;
+}
+
+.method-overview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+
+#method .method-step-title {
+  margin: 1.75rem 0 0.65rem;
+  font-family: var(--font-avenir);
+  font-size: 1.1875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #25344b;
+  text-wrap: balance;
+}
+
+.method-walkthrough {
+  margin-top: 2rem;
+}
+
 .research-highlights {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
