@@ -152,6 +152,124 @@ body {
   white-space: nowrap;
 }
 
+.figure-expand {
+  display: block;
+  padding: 0.5rem;
+  border: 1px solid #e3e8ef;
+  border-radius: 10px;
+  background: #fff;
+  cursor: zoom-in;
+  margin-bottom: 0.65rem;
+}
+
+.figure-expand:hover {
+  border-color: #365f9e;
+}
+
+.figure-expand img {
+  display: block;
+  width: 100%;
+}
+
+.figure-expand-hint {
+  display: block;
+  padding: 0.5rem 0.25rem 0;
+  text-align: right;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #365f9e;
+}
+
+.figure-expand:focus-visible,
+.figure-viewer button:focus-visible,
+.figure-viewer-stage:focus-visible {
+  outline: 3px solid #608bd1;
+  outline-offset: 3px;
+}
+
+html.figure-viewer-open {
+  overflow: hidden;
+}
+
+.figure-viewer {
+  position: fixed;
+  inset: 0;
+  width: 96vw;
+  height: 92vh;
+  height: 92dvh;
+  max-width: 1800px;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  color: #25344b;
+  box-shadow: 0 24px 80px #0005;
+}
+
+.figure-viewer[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.figure-viewer::backdrop {
+  background: rgb(12 20 33 / 80%);
+}
+
+.figure-viewer-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e3e8ef;
+}
+
+.figure-viewer-toolbar h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.figure-viewer-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.figure-viewer button {
+  min-height: 44px;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #dce5f4;
+  border-radius: 7px;
+  background: #f3f6fb;
+  color: #25344b;
+  font: inherit;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+
+.figure-viewer-stage {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.75rem;
+}
+
+.figure-viewer-stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.figure-viewer-stage.is-zoomed img {
+  width: 200%;
+  max-width: none;
+  height: auto;
+}
+
 @media (max-width: 1023px) {
   .research-highlights {
     grid-template-columns: 1fr;

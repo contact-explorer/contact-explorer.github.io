@@ -33,7 +33,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js?v=4"></script>
+  <script src="./static/js/index.js?v=5"></script>
 </head>
 
 <section class="hero hero-banner is-link is-fullheight">
@@ -411,7 +411,10 @@
           </video>
         </div>
         <figure class="mt-5 mb-5">
-          <img src="./static/images/exp_plot.png" alt="Training curves across tasks" />
+          <a class="figure-expand" href="./static/images/exp_plot.png" data-figure-title="Training curves across tasks" aria-label="Enlarge the training curves">
+            <img src="./static/images/exp_plot.png" alt="Training curves across tasks" />
+            <span class="figure-expand-hint">View larger ↗</span>
+          </a>
           <figcaption class="has-text-centered is-size-6">Figure. Training curves across tasks.</figcaption>
         </figure>
         <div class="content">
@@ -424,6 +427,19 @@
   </div>
 </section>
 
+
+<dialog class="figure-viewer" aria-labelledby="figure-viewer-title">
+  <div class="figure-viewer-toolbar">
+    <h2 id="figure-viewer-title"></h2>
+    <div class="figure-viewer-actions">
+      <button type="button" class="figure-zoom" aria-pressed="false" aria-controls="figure-viewer-stage">Zoom in</button>
+      <button type="button" class="figure-close" autofocus>Close <span aria-hidden="true">×</span></button>
+    </div>
+  </div>
+  <div class="figure-viewer-stage" id="figure-viewer-stage" tabindex="0" role="region" aria-label="Enlarged figure; scroll to explore when zoomed">
+    <img alt="" />
+  </div>
+</dialog>
 
 <footer class="footer">
   <div class="container">
