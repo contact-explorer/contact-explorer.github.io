@@ -5,6 +5,7 @@ body {
 
 :root {
   --font-avenir: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  --reading-font-size: 1.125rem;
 }
 
 body {
@@ -36,8 +37,11 @@ body {
 }
 
 .paper-section > .container {
+  /* Measure the shared text and media column with the body font, not captions. */
+  font-size: var(--reading-font-size);
   width: 100%;
-  max-width: none;
+  max-width: 72ch;
+  margin-inline: auto;
 }
 
 .paper-section .columns {
@@ -479,7 +483,7 @@ body {
 .section p {
   font-family: var(--font-avenir);
   font-weight: 400;
-  font-size: 1.125rem;
+  font-size: var(--reading-font-size);
   line-height: 1.7;
   letter-spacing: normal;
 }
@@ -488,7 +492,6 @@ body {
 #abstract p,
 #method .content,
 #experiment .content {
-  max-width: 72ch;
   margin-inline: auto;
   color: #363636;
 }
@@ -504,9 +507,8 @@ body {
 }
 
 @media (min-width: 769px) {
-  .section .content,
-  .section p {
-    font-size: 1.1875rem;
+  :root {
+    --reading-font-size: 1.1875rem;
   }
 }
 
@@ -804,7 +806,7 @@ html.figure-viewer-open {
 }
 
 .real-world-subtitle {
-  max-width: 760px;
+  max-width: 100%;
   margin: 0 auto 1.75rem;
   font-size: 1rem;
   font-style: oblique;
