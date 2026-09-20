@@ -174,7 +174,7 @@
         <li><a href="#real">Real-World Results</a></li>
         <li><a href="#abstract">Abstract</a></li>
         <li><a href="#method">Method</a></li>
-        <li><a href="#experiment">Experiment</a></li>
+        <li><a href="#experiment">Experimental Results</a></li>
       </ul>
     </nav>
   </div>
@@ -200,12 +200,12 @@
           <li>
             <a href="#method"><span class="toc-number" aria-hidden="true">05</span>Method</a>
             <ol class="toc-sublist">
-              <li><a href="#method-contact">Defining contact</a></li>
-              <li><a href="#method-memory">State-conditioned memory</a></li>
-              <li><a href="#method-rewards">Exploration rewards</a></li>
+              <li><a href="#method-contact">Contact Events</a></li>
+              <li><a href="#method-memory">State-Conditioned Contact Counts</a></li>
+              <li><a href="#method-rewards">Exploration Rewards</a></li>
             </ol>
           </li>
-          <li><a href="#experiment"><span class="toc-number" aria-hidden="true">06</span>Experiment</a></li>
+          <li><a href="#experiment"><span class="toc-number" aria-hidden="true">06</span>Experimental Results</a></li>
           <li><a href="#bibtex"><span class="toc-number" aria-hidden="true">07</span>BibTeX</a></li>
         </ol>
         <a class="toc-back" href="#top">Back to top <span aria-hidden="true">↑</span></a>
@@ -220,24 +220,23 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified">
         <p class="content has-text-centered">
-          ContactExplorer is an exploration method for general-purpose dexterous manipulation, which encourages diverse finger-object
-          contact patterns by tracking state-conditioned contact coverage.
+          ContactExplorer promotes diverse finger–object interactions by tracking state-conditioned contact coverage during exploration.
         </p>
         <div class="research-highlights" aria-label="Research highlights">
           <article class="research-highlight">
             <span class="highlight-number" aria-hidden="true">01</span>
             <h3>Contact-driven exploration</h3>
-            <p>Guide exploration toward new <span class="highlight-term">finger–object</span> contacts using <span class="highlight-term">state-conditioned</span> coverage.</p>
+            <p><span class="highlight-term">State-conditioned</span> contact coverage guides exploration toward novel <span class="highlight-term">finger–object</span> contacts.</p>
           </article>
           <article class="research-highlight">
             <span class="highlight-number" aria-hidden="true">02</span>
             <h3>Diverse manipulation tasks</h3>
-            <p>Explore object singulation, retrieval, <span class="highlight-term">in-hand</span> reorientation, and bimanual manipulation.</p>
+            <p>Evaluated on object singulation, retrieval, <span class="highlight-term">in-hand</span> reorientation, and bimanual manipulation.</p>
           </article>
           <article class="research-highlight">
             <span class="highlight-number" aria-hidden="true">03</span>
             <h3>Sim-to-real transfer</h3>
-            <p>Distill simulation policies into a <span class="highlight-term">vision-based</span> policy for <span class="highlight-term">real-world</span> <span class="highlight-term">object singulation.</span></p>
+            <p>A <span class="highlight-term">vision-based</span> policy distilled from simulation performs <span class="highlight-term">real-world</span> <span class="highlight-term">object singulation.</span></p>
           </article>
         </div>
         <div class="publication-video">
@@ -404,7 +403,7 @@
 
         <div class="content">
           <p>
-            Dexterous exploration needs to discover useful physical interactions, but contact is sparse: rewarding contact alone gives the hand no guidance before it touches the object. <strong>ContactExplorer</strong> uses a shared memory of finger–object contacts to guide the hand toward under-explored regions and reward novel interactions when contact occurs.
+            Dexterous exploration needs to discover useful physical interactions, but contact is sparse: rewarding contact alone gives the hand no guidance before it touches the object. <strong>ContactExplorer</strong> uses a state-conditioned contact counter to guide the hand toward under-explored regions and reward novel interactions when contact occurs.
           </p>
         </div>
 
@@ -414,28 +413,28 @@
         </figure>
 
         <div class="content method-explanation">
-          <h3 class="method-step-title" id="method-contact">01 · Define contact: which finger touches which region?</h3>
+          <h3 class="method-step-title" id="method-contact">01 · Contact Events</h3>
           <p>
             We partition the object surface into regions using point positions and surface normals, and represent each finger with sparse surface keypoints. A distance–force criterion detects contact between a finger and an object region. This gives a concrete unit of exploration: a <strong>finger–region pair</strong>, rather than proximity to the object alone.
           </p>
-          <h3 class="method-step-title" id="method-memory">02 · Measure novelty in the right object state</h3>
+          <h3 class="method-step-title" id="method-memory">02 · State-Conditioned Contact Counts</h3>
           <p>
             The same contact may be useful again when the object configuration or goal changes. We therefore encode point clouds of the <strong>current and goal object poses</strong> with an autoencoder, then use SimHash to assign a discrete state cluster. A counter records how often each finger–region pair has been contacted within that cluster. These counts persist across training episodes; rarely visited pairs receive higher novelty weights, while repeated contacts contribute less.
           </p>
-          <h3 class="method-step-title" id="method-rewards">03 · Guide reaching, then reward contact</h3>
+          <h3 class="method-step-title" id="method-rewards">03 · Exploration Rewards</h3>
           <p>
             <strong>Before contact:</strong> the energy-based reaching score combines the same novelty weights with a distance-based kernel over object surface points. Nearby, under-explored regions contribute more, providing continuous guidance toward new interactions even while the hand is in free space.
           </p>
           <p>
-            <strong>When contact occurs:</strong> the contact coverage score measures the novelty of the finger–region pairs actually touched. Merely approaching the object cannot earn this contact-based signal.
+            <strong>When contact occurs:</strong> the contact coverage score measures the novelty of the finger–region pairs observed in contact. This contact-based signal reflects observed contacts rather than proximity alone.
           </p>
           <p>
-            For each score, we reward only <strong>improvements over its best value in the current episode</strong>, discouraging repeated exploitation of an already discovered interaction. Both rewards are computed before updating the contact counts, then added to the task reward for PPO training. The episode-best scores reset each episode; the contact memory does not.
+            For each score, we reward only <strong>improvements over its best value in the current episode</strong>, discouraging repeated exploitation of an already discovered interaction. Both rewards are computed before updating the contact counts, then added to the task reward for PPO training. Episode-wise maxima are reset at each episode boundary, while contact counts persist across episodes.
           </p>
         </div>
 
         <div class="method-walkthrough">
-          <h3 class="method-step-title">Video walkthrough</h3>
+          <h3 class="method-step-title">Method Overview Video</h3>
           <div class="publication-video">
             <video controls preload="metadata">
               <source src="static/videos/contact_explorer_media/content/ce_method.mp4?v=20260920" type="video/mp4">
@@ -450,7 +449,7 @@
 
 <section class="section paper-section" id="experiment" aria-labelledby="experiment-title">
   <div class="container is-max-widescreen">
-    <h2 class="section-heading" id="experiment-title"><span class="section-number" aria-hidden="true">06</span>Experiment</h2>
+    <h2 class="section-heading" id="experiment-title"><span class="section-number" aria-hidden="true">06</span>Experimental Results</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="publication-video">
@@ -459,15 +458,15 @@
           </video>
         </div>
         <figure class="mt-5 mb-5">
-          <a class="figure-expand" href="./static/images/exp_plot.png" data-figure-title="Training curves across tasks" aria-label="Enlarge the training curves">
-            <img src="./static/images/exp_plot.png" alt="Training curves across tasks" />
+          <a class="figure-expand" href="./static/images/exp_plot.png" data-figure-title="Training curves across manipulation tasks" aria-label="Enlarge the training curves">
+            <img src="./static/images/exp_plot.png" alt="Training curves across manipulation tasks" />
             <span class="figure-expand-hint">View larger ↗</span>
           </a>
-          <figcaption class="has-text-centered is-size-6">Figure. Training curves across tasks.</figcaption>
+          <figcaption class="has-text-centered is-size-6">Training curves across manipulation tasks.</figcaption>
         </figure>
         <div class="content">
           <p>
-            We compare ContactExplorer, against baselines on a range of challenging manipulation tasks. ContactExplorer shows (i) more stable training across different random seeds, (ii) improved sample efficiency, and (iii) achieves higher task performance overall.
+            We compare ContactExplorer with baseline exploration methods across a range of manipulation tasks. ContactExplorer exhibits more stable training across random seeds, greater sample efficiency, and higher overall task performance.
           </p>
         </div>
       </div>
@@ -525,14 +524,6 @@
             This website is licensed under a <a rel="license"
               href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
               Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow and modify the <a
-              href="https://github.com/nerfies/nerfies.github.io">source
-              code</a> of this website as long as
-            you link back to the <a href="https://nerfies.github.io/">NeRFies</a> page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
           </p>
         </div>
       </div>
