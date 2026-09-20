@@ -26,17 +26,18 @@
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=12">
+  <link rel="stylesheet" href="./static/css/index.css?v=16">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js?v=5"></script>
+  <script src="./static/js/index.js?v=8"></script>
 </head>
 
-<section class="hero hero-banner is-link is-fullheight">
+<body>
+<section class="hero hero-banner is-link is-fullheight" id="top">
   <div class="hero-video is-hidden-mobile">
     <video playsinline autoplay muted loop>
       <source src=" ./static/videos/teaser_video_real_web.mp4" type="video/mp4">
@@ -166,7 +167,7 @@
 
   <!-- Hero footer: will stick at the bottom -->
   <div class="hero-foot is-hidden-mobile">
-    <nav class="tabs is-boxed is-fullwidth is-size-5">
+    <nav class="tabs is-boxed is-fullwidth is-size-5" aria-label="Jump to a section">
       <ul>
         <li><a href="#motivation">Motivation</a></li>
         <li><a href="#sim">Simulation Tasks</a></li>
@@ -182,9 +183,40 @@
 
 
 
-<section class="section is-medium" id="motivation">
+<div class="paper-layout">
+  <aside class="toc-rail">
+    <details class="page-toc" open>
+      <summary>
+        <span>Contents</span>
+        <span class="toc-current" aria-hidden="true">Motivation</span>
+      </summary>
+      <nav aria-label="Table of contents">
+        <div class="toc-title">On this page</div>
+        <ol class="toc-list">
+          <li><a href="#motivation"><span class="toc-number" aria-hidden="true">01</span>Motivation</a></li>
+          <li><a href="#sim"><span class="toc-number" aria-hidden="true">02</span>Simulation Tasks</a></li>
+          <li><a href="#real"><span class="toc-number" aria-hidden="true">03</span>Real-World Results</a></li>
+          <li><a href="#abstract"><span class="toc-number" aria-hidden="true">04</span>Abstract</a></li>
+          <li>
+            <a href="#method"><span class="toc-number" aria-hidden="true">05</span>Method</a>
+            <ol class="toc-sublist">
+              <li><a href="#method-contact">Defining contact</a></li>
+              <li><a href="#method-memory">State-conditioned memory</a></li>
+              <li><a href="#method-rewards">Exploration rewards</a></li>
+            </ol>
+          </li>
+          <li><a href="#experiment"><span class="toc-number" aria-hidden="true">06</span>Experiment</a></li>
+          <li><a href="#bibtex"><span class="toc-number" aria-hidden="true">07</span>BibTeX</a></li>
+        </ol>
+        <a class="toc-back" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+      </nav>
+    </details>
+  </aside>
+
+<main class="paper-content">
+<section class="section paper-section" id="motivation" aria-labelledby="motivation-title">
   <div class="container is-max-widescreen">
-    <h2 class="title is-2 has-text-centered is-size-4-mobile">Motivation</h2>
+    <h2 class="section-heading" id="motivation-title"><span class="section-number" aria-hidden="true">01</span>Motivation</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified">
         <p class="content has-text-centered">
@@ -219,9 +251,9 @@
 </section>
 
 
-<section class="section" id="sim">
+<section class="section paper-section" id="sim" aria-labelledby="sim-title">
   <div class="container is-max-widescreen">
-    <h2 class="title is-2 has-text-centered is-size-4-mobile">Simulation Tasks</h2>
+    <h2 class="section-heading" id="sim-title"><span class="section-number" aria-hidden="true">02</span>Simulation Tasks</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="simulation-mosaic">
@@ -297,9 +329,9 @@
 </section>
 
 
-<section class="section real-world-section" id="real">
+<section class="section paper-section real-world-section" id="real" aria-labelledby="real-title">
   <div class="container is-max-widescreen">
-    <h2 class="title is-2 has-text-centered is-size-4-mobile">Real-World Results</h2>
+    <h2 class="section-heading" id="real-title"><span class="section-number" aria-hidden="true">03</span>Real-World Results</h2>
     <p class="real-world-subtitle has-text-centered">
       We distill the simulation oracle policy into a vision-based policy and evaluate real-world object singulation with randomized target objects. Videos are shown at 1x speed.
     </p>
@@ -344,9 +376,9 @@
 </section>
 
 
-<section class="section is-medium" id="abstract">
+<section class="section paper-section" id="abstract" aria-labelledby="abstract-title">
   <div class="container is-max-widescreen">
-    <h2 class="title is-2 has-text-centered is-size-4-mobile">Abstract</h2>
+    <h2 class="section-heading" id="abstract-title"><span class="section-number" aria-hidden="true">04</span>Abstract</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified is-hidden-mobile">
         <p class="content">
@@ -364,11 +396,11 @@
 </section>
 
 
-<section class="section is-small" id="method">
+<section class="section paper-section" id="method" aria-labelledby="method-title">
   <div class="container is-max-widescreen">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-2 has-text-centered is-size-4-mobile">Method</h2>
+        <h2 class="section-heading" id="method-title"><span class="section-number" aria-hidden="true">05</span>Method</h2>
 
         <div class="content">
           <p>
@@ -382,15 +414,15 @@
         </figure>
 
         <div class="content method-explanation">
-          <h3 class="method-step-title">01 · Define contact: which finger touches which region?</h3>
+          <h3 class="method-step-title" id="method-contact">01 · Define contact: which finger touches which region?</h3>
           <p>
             We partition the object surface into regions using point positions and surface normals, and represent each finger with sparse surface keypoints. A distance–force criterion detects contact between a finger and an object region. This gives a concrete unit of exploration: a <strong>finger–region pair</strong>, rather than proximity to the object alone.
           </p>
-          <h3 class="method-step-title">02 · Measure novelty in the right object state</h3>
+          <h3 class="method-step-title" id="method-memory">02 · Measure novelty in the right object state</h3>
           <p>
             The same contact may be useful again when the object configuration or goal changes. We therefore encode point clouds of the <strong>current and goal object poses</strong> with an autoencoder, then use SimHash to assign a discrete state cluster. A counter records how often each finger–region pair has been contacted within that cluster. These counts persist across training episodes; rarely visited pairs receive higher novelty weights, while repeated contacts contribute less.
           </p>
-          <h3 class="method-step-title">03 · Guide reaching, then reward contact</h3>
+          <h3 class="method-step-title" id="method-rewards">03 · Guide reaching, then reward contact</h3>
           <p>
             <strong>Before contact:</strong> the energy-based reaching score combines the same novelty weights with a distance-based kernel over object surface points. Nearby, under-explored regions contribute more, providing continuous guidance toward new interactions even while the hand is in free space.
           </p>
@@ -416,9 +448,9 @@
 </section>
 
 
-<section class="section is-medium" id="experiment">
+<section class="section paper-section" id="experiment" aria-labelledby="experiment-title">
   <div class="container is-max-widescreen">
-    <h2 class="title is-2 has-text-centered is-size-4-mobile">Experiment</h2>
+    <h2 class="section-heading" id="experiment-title"><span class="section-number" aria-hidden="true">06</span>Experiment</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="publication-video">
@@ -443,6 +475,29 @@
   </div>
 </section>
 
+<section class="section paper-section" id="bibtex" aria-labelledby="bibtex-title">
+  <div class="container is-max-widescreen">
+    <h2 class="section-heading" id="bibtex-title"><span class="section-number" aria-hidden="true">07</span>BibTeX</h2>
+    <div class="citation-box">
+      <button class="citation-copy" type="button" aria-label="Copy BibTeX" aria-controls="bibtex-code" hidden>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="8" y="3" width="12" height="15" rx="2" />
+          <path d="M5 7H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" />
+        </svg>
+        <span class="citation-copy-label">Copy</span>
+      </button>
+      <pre class="citation-code" tabindex="0" aria-label="BibTeX citation"><code id="bibtex-code">@misc{liu2026contactexplorer,
+  title = {{ContactExplorer}: Contact Coverage-Guided Exploration for General-Purpose Dexterous Manipulation},
+  author = {Zixuan Liu and Ruoyi Qiao and Chenrui Tie and Xuanwei Liu and Yunfan Lou and Chongkai Gao and Zhixuan Xu and Lin Shao},
+  year = {2026}
+}</code></pre>
+    </div>
+    <div class="citation-status" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+</main>
+</div>
 
 <dialog class="figure-viewer" aria-labelledby="figure-viewer-title">
   <div class="figure-viewer-toolbar">

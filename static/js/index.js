@@ -1,4 +1,111 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const button = document.querySelector('.citation-copy');
+  const code = document.querySelector('#bibtex-code');
+  const status = document.querySelector('.citation-status');
+  if (!button || !code || !status) return;
+  const label = button.querySelector('.citation-copy-label');
+
+  button.hidden = false;
+  let resetTimer;
+  button.addEventListener('click', async () => {
+    window.clearTimeout(resetTimer);
+    button.disabled = true;
+    label.textContent = 'Copy';
+    status.textContent = '';
+    try {
+      await navigator.clipboard.writeText(code.textContent.trim());
+      label.textContent = 'Copied!';
+      status.textContent = 'BibTeX copied to clipboard.';
+      resetTimer = window.setTimeout(() => {
+        label.textContent = 'Copy';
+      }, 2500);
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(code);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      label.textContent = 'Press Ctrl/⌘+C';
+      status.textContent = 'Automatic copying is unavailable. The citation is selected; press Ctrl+C or ⌘C to copy.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toc = document.querySelector('.page-toc');
+  if (!toc) return;
+
+  const compact = window.matchMedia('(max-width: 768px)');
+  const summary = toc.querySelector('summary');
+  const currentLabel = toc.querySelector('.toc-current');
+  const links = [...toc.querySelectorAll('.toc-list a')];
+  const entries = links.map((link) => ({
+    link,
+    target: document.getElementById(link.hash.slice(1)),
+  })).filter(({ target }) => target);
+  let activeTarget;
+  let scheduled = false;
+
+  const updateCurrent = () => {
+    scheduled = false;
+    const readingLine = compact.matches ? 136 : 120;
+    let current;
+    for (const entry of entries) {
+      if (entry.target.getBoundingClientRect().top > readingLine) break;
+      current = entry;
+    }
+    if (activeTarget === current?.target) return;
+    activeTarget = current?.target;
+    links.forEach((link) => {
+      link.removeAttribute('aria-current');
+      link.classList.remove('is-active-section');
+    });
+    if (!current) {
+      currentLabel.textContent = 'Motivation';
+      return;
+    }
+    current.link.setAttribute('aria-current', 'location');
+    const section = current.target.closest('.paper-section');
+    const sectionLink = links.find((link) => link.hash === `#${section.id}`);
+    if (sectionLink !== current.link) sectionLink?.classList.add('is-active-section');
+    currentLabel.textContent = section.querySelector('.section-heading').textContent.replace(/^\d+/, '').trim();
+  };
+
+  const scheduleUpdate = () => {
+    if (scheduled) return;
+    scheduled = true;
+    window.requestAnimationFrame(updateCurrent);
+  };
+
+  const updateLayout = () => {
+    toc.open = !compact.matches;
+    scheduleUpdate();
+  };
+  compact.addEventListener('change', updateLayout);
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate);
+  window.addEventListener('load', scheduleUpdate);
+
+  toc.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || !compact.matches) return;
+      toc.open = false;
+      // Keep keyboard focus visible when the menu containing the link closes.
+      summary.focus({ preventScroll: true });
+    });
+  });
+  toc.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && compact.matches && toc.open) {
+      toc.open = false;
+      summary.focus({ preventScroll: true });
+    }
+  });
+  updateLayout();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
   const viewer = document.querySelector('.figure-viewer');
   if (!viewer || typeof viewer.showModal !== 'function') return;
 
