@@ -26,14 +26,15 @@
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=17">
+  <link rel="stylesheet" href="./static/css/index.css?v=21">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js?v=8"></script>
+  <script src="./static/js/index.js?v=10"></script>
+  <script src="./static/js/method-overview.js?v=3" defer></script>
 </head>
 
 <body>
@@ -407,9 +408,80 @@
           </p>
         </div>
 
-        <figure class="method-overview">
-          <img src="./static/images/ce_overview.png" width="2800" height="1172" alt="ContactExplorer pipeline: learned state hashing indexes a state–finger–region contact counter; the counter supplies energy-based reaching and contact coverage rewards for PPO training." />
-          <figcaption class="has-text-centered is-size-6">Overview of ContactExplorer.</figcaption>
+        <figure class="method-overview" aria-labelledby="method-overview-caption">
+          <div class="method-flow">
+            <div class="method-flow-toolbar">
+              <span>ContactExplorer <span aria-hidden="true">/</span> Method overview</span>
+              <button class="method-flow-toggle" type="button" aria-label="Pause overview animation" hidden>
+                <span class="method-flow-toggle-icon" aria-hidden="true">Ⅱ</span>
+                <span class="method-flow-toggle-label">Pause</span>
+              </button>
+            </div>
+            <div class="method-flow-canvas">
+              <svg class="method-flow-connectors" aria-hidden="true" focusable="false">
+                <defs>
+                  <marker id="method-arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#496fc1" /></marker>
+                  <marker id="method-arrow-coral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a05e49" /></marker>
+                  <marker id="method-arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3f745b" /></marker>
+                </defs>
+                <g class="method-flow-paths"></g>
+              </svg>
+
+              <div class="method-node method-node-hashing" data-flow-node="hashing">
+                <h3>State hashing</h3>
+                <div class="method-state-inputs"><span>Current<br>pose</span><span>Goal<br>pose</span></div>
+                <span class="method-inner-arrow" aria-hidden="true">↓</span>
+                <div class="method-encoder">Learned encoder <i>φ</i></div>
+                <span class="method-inner-arrow" aria-hidden="true">↓</span>
+                <div class="method-hash-output" data-flow-node="hash-output">
+                  <div class="method-hash-code" aria-label="An example state hash code">
+                    <span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>1</span><span>0</span>
+                  </div>
+                  <div class="method-node-description">SimHash → state cluster <i>q</i></div>
+                </div>
+              </div>
+
+              <div class="method-node method-node-memory">
+                <div class="method-counter-summary" data-flow-node="counter">
+                  <h3>Contact counter</h3>
+                  <div class="method-counter-symbol">C(q, f, k)</div>
+                  <div class="method-counter-grid" role="img" aria-label="Contact counts indexed by state cluster, finger, and object region">
+                    <i></i><i class="count-mid"></i><i class="count-high"></i><i></i><i class="count-low"></i>
+                    <i class="count-mid"></i><i class="count-low"></i><i></i><i class="count-contact"></i><i></i>
+                    <i class="count-high"></i><i></i><i class="count-low"></i><i></i><i class="count-mid"></i>
+                  </div>
+                  <div class="method-node-description">State × finger × region</div>
+                </div>
+                <div class="method-contact-events" data-flow-node="interaction">
+                  <span class="method-node-kicker">Contact events</span>
+                  <div>Finger <i>f</i> · Region <i>k</i></div>
+                </div>
+              </div>
+
+              <div class="method-node method-node-reaching" data-flow-node="reaching">
+                <span class="method-node-kicker">Before contact</span>
+                <h3>Energy-based reaching</h3>
+                <div class="method-node-description">Under-explored regions</div>
+                <span class="method-reward-symbol">r<sup>energy</sup></span>
+              </div>
+              <div class="method-node method-node-coverage" data-flow-node="coverage">
+                <span class="method-node-kicker">On contact</span>
+                <h3>Contact coverage</h3>
+                <div class="method-node-description">Novel finger–region pairs</div>
+                <span class="method-reward-symbol">r<sup>contact</sup></span>
+              </div>
+
+              <div class="method-node method-node-policy" data-flow-node="policy">
+                <h3>PPO</h3>
+                <div class="method-node-description">Policy<br>update</div>
+              </div>
+
+              <div class="method-node method-node-simulation" data-flow-node="simulation">
+                <h3>Physics simulation</h3>
+              </div>
+            </div>
+          </div>
+          <figcaption id="method-overview-caption">Shared contact counts guide reaching and reward novel contacts. Counts are updated after reward evaluation.</figcaption>
         </figure>
 
         <div class="content method-explanation">

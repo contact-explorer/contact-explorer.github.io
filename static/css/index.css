@@ -516,11 +516,298 @@ body {
   margin: 1.75rem 0 2.5rem;
 }
 
-.method-overview img {
-  display: block;
+.method-flow {
+  --flow-blue: #496fc1;
+  --flow-coral: #a05e49;
+  --flow-green: #3f745b;
+  container-type: inline-size;
+  padding: 1.1rem 0.75rem 1.75rem;
+  border: 1px solid #eaece8;
+  border-radius: 12px;
+  background: #f7f8f5;
+}
+
+.method-flow-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2rem;
+  margin: 0 0.75rem 1.4rem;
+  color: #6c7581;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.method-flow-toolbar > span > span {
+  margin-inline: 0.3rem;
+  color: #a6afbc;
+}
+
+.method-flow-toggle {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #d7ded8;
+  border-radius: 5px;
+  background: transparent;
+  color: #616d66;
+  font: inherit;
+  cursor: pointer;
+}
+
+.method-flow-toggle[hidden] { display: none; }
+.method-flow-toggle:hover { background: #fff; }
+.method-flow-toggle:focus-visible { outline: 2px solid var(--flow-blue); outline-offset: 3px; }
+.method-flow-toggle-icon { width: 0.7rem; text-align: center; }
+
+.method-flow-canvas {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.12fr 1.32fr 1.28fr 0.6fr;
+  grid-template-rows: minmax(9.2em, auto) minmax(9.2em, auto) auto;
+  align-items: stretch;
+  gap: 1.1em 2.5em;
+  padding: 0.5em 2em 2em 0.5em;
+  font-size: clamp(9px, 1.8cqw, 14px);
+  line-height: 1.45;
+  text-align: center;
+}
+
+.method-flow-connectors {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  margin-bottom: 0.75rem;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.method-flow-edge {
+  fill: none;
+  stroke-width: 0.11em;
+  stroke-dasharray: 0.36em 0.36em;
+  stroke-linejoin: round;
+}
+
+.method-flow-label {
+  font: 0.78em "SFMono-Regular", Consolas, monospace;
+  paint-order: stroke;
+  stroke: #f7f8f5;
+  stroke-width: 7px;
+  stroke-linejoin: round;
+}
+
+.method-node {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 1.15em 0.7em;
+  border: 1px solid #bbc9e0;
+  border-radius: 7px;
+  background: #fff;
+  color: #25344b;
+}
+
+.method-node h3 {
+  margin: 0;
+  font-size: 1.08em;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.method-node-kicker {
+  display: block;
+  margin-bottom: 0.5em;
+  color: #687d9d;
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.method-node-description {
+  margin-top: 0.55em;
+  color: #637084;
+  font-size: 0.83em;
+  line-height: 1.5;
+}
+
+.method-node-hashing {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.method-state-inputs {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 1.8em;
+  font-size: 0.85em;
+}
+
+.method-state-inputs span {
+  flex: 1;
+  padding: 0.45em 0;
+  border: 1px solid #dce3ee;
+  border-radius: 4px;
+  color: #637084;
+}
+
+.method-inner-arrow {
+  margin: 0.3em 0;
+  color: #9aacc7;
+}
+
+.method-encoder {
+  padding: 0.8em 0.2em;
+  border: 1px solid #c1cfe7;
+  border-radius: 4px;
+  background: #f2f5fa;
+  font-size: 0.87em;
+}
+
+.method-hash-output {
+  margin-block: auto;
+}
+
+.method-hash-code {
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+  font: 0.85em/1 "SFMono-Regular", Consolas, monospace;
+}
+
+.method-hash-code span {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  min-width: 0;
+  height: 1.8em;
+  border-radius: 3px;
+  background: #edf1f9;
+  color: #506990;
+}
+
+.method-node-memory {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+.method-counter-summary {
+  position: relative;
+  z-index: 1;
+  padding: 1.15em 0.7em;
+  border: 1px solid #bbc9e0;
+  border-radius: 7px;
+  background: #fff;
+}
+
+.method-contact-events {
+  position: relative;
+  z-index: 1;
+  margin-top: auto;
+  padding: 0.9em 0.5em;
+  border: 1px solid #d2a596;
+  border-radius: 7px;
+  background: #fcf7f4;
+  font-size: 0.9em;
+}
+
+.method-contact-events .method-node-kicker {
+  color: var(--flow-coral);
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.method-node-reaching,
+.method-node-coverage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.method-counter-symbol {
+  margin: 0.8em 0 0.6em;
+  color: #506990;
+  font: 0.9em/1.5 "SFMono-Regular", Consolas, monospace;
+}
+
+.method-counter-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1.1em);
+  justify-content: center;
+  gap: 0.2em;
+}
+
+.method-counter-grid i {
+  height: 1.1em;
+  border: 1px solid #dee6f3;
+  border-radius: 2px;
+  background: #f5f7fb;
+}
+
+.method-counter-grid .count-low { background: #dbe6f7; }
+.method-counter-grid .count-mid { background: #aec5e7; border-color: #aec5e7; }
+.method-counter-grid .count-high { background: #7f9ecb; border-color: #7f9ecb; }
+.method-counter-grid .count-contact { background: #e8b1a1; border-color: #cf8d78; }
+
+.method-reward-symbol {
+  margin-top: 0.6em;
+  color: var(--flow-blue);
+  font-family: Georgia, serif;
+  font-size: 1.15em;
+  font-style: italic;
+}
+
+.method-node-reaching { grid-column: 3; grid-row: 1; border-color: #99b2e0; background: #f6f8fd; }
+.method-node-reaching .method-node-kicker { color: var(--flow-blue); }
+.method-node-coverage { grid-column: 3; grid-row: 2; border-color: #d2a596; background: #fcf7f4; }
+.method-node-coverage .method-node-kicker,
+.method-node-coverage .method-reward-symbol { color: var(--flow-coral); }
+
+.method-node-policy {
+  grid-column: 4;
+  grid-row: 1 / 3;
+  align-self: center;
+  padding: 1.3em 0.35em;
+  border-color: #99b2e0;
+  text-align: center;
+}
+
+.method-node-simulation {
+  grid-column: 2 / 4;
+  grid-row: 3;
+  margin-top: 2em;
+  padding: 0.9em 0.5em;
+  border-color: #85a394;
+  color: var(--flow-green);
+}
+
+.method-overview > figcaption {
+  margin-top: 0.9rem;
+  color: #687384;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Keep the overview's spatial relationships intact on narrow screens. */
+@container (max-width: 440px) {
+  .method-flow-canvas {
+    column-gap: 1.6em;
+    padding-inline: 0 1.4em;
+    font-size: clamp(7px, 2.05cqw, 9px);
+  }
+  .method-flow-toolbar { gap: 0.5rem; margin-inline: 0.25rem; font-size: 0.625rem; }
 }
 
 #method .method-step-title {
