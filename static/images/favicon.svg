@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>ContactExplorer</title>
+  <desc>A white C on a bright blue tile.</desc>
+  <rect width="64" height="64" rx="16" fill="#2E72D6"/>
+  <path fill="#F8FAFD" transform="translate(1 0)"
+        d="M49 19L43 25C40 22 36.7 20.5 32.5 20.5C25.9 20.5 21 25.6 21 32S25.9 43.5 32.5 43.5C36.7 43.5 40 42 43 39L49 45C44.7 49.6 39.1 52 32.5 52C21 52 12 43.4 12 32S21 12 32.5 12C39.1 12 44.7 14.4 49 19Z"/>
+</svg>
