@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css?v=21">
+  <link rel="stylesheet" href="./static/css/index.css?v=27">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -54,53 +54,19 @@
     </video>
   </div>
   <div class="overlay"></div>
-  <!-- Hero head: will stick at the top -->
-  <div class="hero-head is-hidden-mobile">
-    <header class="navbar">
-      <div class="container is-size-5">
-        <div class="navbar-menu">
-          <div class="navbar-end">
-            <a class="navbar-item pl-4 pr-4" href="./static/ccge.pdf">
-              <span class="icon" style="margin-right:5px;">
-                <img src="./static/images/pdf.svg" alt="PDF" />
-              </span>
-              <span>Paper</span>
-            </a>
-            <a class="navbar-item  pl-4 pr-4" href="https://arxiv.org/abs/2603.10971">
-              <span class="icon" style="margin-right:5px;">
-                <img src="./static/images/arxiv.svg" alt="ArXiv" />
-              </span>
-              <span>arXiv</span> </a>
-            <a href="https://youtu.be/NfZVJNBX1Uc" class="navbar-item  pl-4 pr-4">
-              <span class="icon" style="margin-right:5px;">
-                <img src="./static/images/youtube.svg" alt="Youtube" />
-              </span>
-              <span>Video</span> </a>
-            <a  class="navbar-item  pl-4 pr-4" href="https://github.com/ruoyiqiao/CCGE">
-              <span class="icon" style="margin-right:5px;">
-                <img src="./static/images/github.svg" alt="GitHub" />
-              </span>
-                <span>Code</span> </a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </header>
-  </div>
-
   <!-- Hero content: will be in the middle -->
   <div class="hero-body">
     <div class="container has-text-centered">
-      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 11rem;">
+      <h1 class="title publication-title publication-brand">
         ContactExplorer
       </h1>
-      <h1 class="title is-1 publication-title is-size-1-mobile" style="font-size: 4rem;">
+      <h1 class="title publication-title publication-heading">
         Contact Coverage-Guided Exploration
       </h1>
-      <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 4rem;">
+      <h1 class="subtitle publication-title publication-heading">
         for General-Purpose Dexterous Manipulation
       </h1>
-      <div class="is-size-4 publication-authors">
+      <div class="publication-authors publication-author-list">
         <span class="author-block"><a href="https://panda-shawn.github.io/">Zixuan Liu</a><sup>1</sup>*</span> and
         <span class="author-block"><a href="https://github.com/ruoyiqiao">Ruoyi Qiao</a><sup>1</sup>*</span>,
         <span class="author-block"><a href="https://crtie.github.io/">Chenrui Tie</a><sup>1</sup></span>,
@@ -110,11 +76,11 @@
         <span class="author-block"><a href="https://ariszxxu.github.io/">Zhixuan Xu</a><sup>1</sup></span>,
         <span class="author-block"><a href="https://linsats.github.io/">Lin Shao</a><sup>1,2,&dagger;</sup></span>
       </div>
-      <div class="is-size-5 publication-authors">
+      <div class="publication-authors publication-affiliations">
         <span class="author-block"><sup>1</sup> School of Computing, National University of Singapore</span><br>
         <span class="author-block"><sup>2</sup> RoboScience</span><br>
       </div>
-      <div class="is-size-5 publication-authors">
+      <div class="publication-authors publication-author-note">
         <span class="author-block">*</span> Equal contribution; listed in random order.
         <span class="author-block"><sup>&dagger;</sup> Corresponding author.</span>
       </div>
@@ -127,19 +93,19 @@
       <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 1.5rem; opacity: 80%;">
         X-Embodiment Workshop CoRL 2024
       </h1> -->
-      <div class="column has-text-centered is-hidden-tablet">
-        <div class="publication-links">
+      <div class="hero-resource-links">
+        <nav class="publication-links" aria-label="Paper resources">
           <!-- PDF Link. -->
           <span class="link-block">
-            <a href="./static/ccge.pdf" class="external-link button is-normal is-rounded is-dark">
+            <a href="./static/ccge.pdf" class="external-link button is-rounded is-white" aria-label="Paper" title="Paper">
               <span class="icon">
-                <img src="./static/images/pdf.svg" alt="PDF" />
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M14 3v5h5M9 12h6M9 16h6"/></svg>
               </span>
               <span>Paper</span>
             </a>
           </span>
           <span class="link-block">
-            <a href="https://arxiv.org/abs/2603.10971" class="external-link button is-normal is-rounded is-dark">
+            <a href="https://arxiv.org/abs/2603.10971" class="external-link button is-rounded is-white" aria-label="arXiv" title="arXiv">
               <span class="icon">
                 <img src="./static/images/arxiv.svg" alt="ArXiv" />
               </span>
@@ -148,23 +114,31 @@
           </span>
           <!-- Video Link. -->
           <span class="link-block">
-            <a href="https://youtu.be/NfZVJNBX1Uc" class="external-link button is-normal is-rounded is-dark">
+            <a href="https://youtu.be/NfZVJNBX1Uc" class="external-link button is-rounded is-white" aria-label="Video" title="Video">
               <span class="icon">
-                <img src="./static/images/youtube.svg" alt="Youtube" />
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="5" fill="#ff0033"/><path d="m10 8 6 4-6 4Z" fill="#fff"/></svg>
               </span>
               <span>Video</span>
             </a>
           </span>
           <!-- Code Link. -->
           <span class="link-block">
-            <a href="https://github.com/ruoyiqiao/CCGE" class="external-link button is-normal is-rounded is-dark">
+            <a href="https://github.com/ruoyiqiao/CCGE" class="external-link button is-rounded is-white resource-code" aria-label="Code" title="Code">
               <span class="icon">
                 <img src="./static/images/github.svg" alt="GitHub" />
               </span>
               <span>Code</span>
             </a>
           </span>
-        </div>
+          <span class="link-block">
+            <a href="#bibtex" class="external-link button is-rounded is-white" aria-label="BibTeX" title="BibTeX">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4V3Z"/></svg>
+              </span>
+              <span>BibTeX</span>
+            </a>
+          </span>
+        </nav>
       </div>
     </div>
 
@@ -172,7 +146,7 @@
 
   <!-- Hero footer: will stick at the bottom -->
   <div class="hero-foot is-hidden-mobile">
-    <nav class="tabs is-boxed is-fullwidth is-size-5" aria-label="Jump to a section">
+    <nav class="tabs is-boxed is-fullwidth" aria-label="Jump to a section">
       <ul>
         <li><a href="#motivation">Motivation</a></li>
         <li><a href="#sim">Simulation Tasks</a></li>
@@ -198,20 +172,20 @@
       <nav aria-label="Table of contents">
         <div class="toc-title">On this page</div>
         <ol class="toc-list">
-          <li><a href="#motivation"><span class="toc-number" aria-hidden="true">01</span>Motivation</a></li>
-          <li><a href="#sim"><span class="toc-number" aria-hidden="true">02</span>Simulation Tasks</a></li>
-          <li><a href="#real"><span class="toc-number" aria-hidden="true">03</span>Real-World Results</a></li>
-          <li><a href="#abstract"><span class="toc-number" aria-hidden="true">04</span>Abstract</a></li>
+          <li><a href="#motivation">Motivation</a></li>
+          <li><a href="#sim">Simulation Tasks</a></li>
+          <li><a href="#real">Real-World Results</a></li>
+          <li><a href="#abstract">Abstract</a></li>
           <li>
-            <a href="#method"><span class="toc-number" aria-hidden="true">05</span>Method</a>
+            <a href="#method">Method</a>
             <ol class="toc-sublist">
               <li><a href="#method-contact">Contact Events</a></li>
               <li><a href="#method-memory">State-Conditioned Contact Counts</a></li>
               <li><a href="#method-rewards">Exploration Rewards</a></li>
             </ol>
           </li>
-          <li><a href="#experiment"><span class="toc-number" aria-hidden="true">06</span>Experimental Results</a></li>
-          <li><a href="#bibtex"><span class="toc-number" aria-hidden="true">07</span>BibTeX</a></li>
+          <li><a href="#experiment">Experimental Results</a></li>
+          <li><a href="#bibtex">BibTeX</a></li>
         </ol>
         <a class="toc-back" href="#top">Back to top <span aria-hidden="true">↑</span></a>
       </nav>
@@ -221,7 +195,7 @@
 <main class="paper-content">
 <section class="section paper-section" id="motivation" aria-labelledby="motivation-title">
   <div class="container is-max-widescreen">
-    <h2 class="section-heading" id="motivation-title"><span class="section-number" aria-hidden="true">01</span>Motivation</h2>
+    <h2 class="section-heading" id="motivation-title">Motivation</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified">
         <p class="content has-text-centered">
@@ -229,17 +203,14 @@
         </p>
         <div class="research-highlights" aria-label="Research highlights">
           <article class="research-highlight">
-            <span class="highlight-number" aria-hidden="true">01</span>
             <h3>Contact-driven exploration</h3>
             <p><span class="highlight-term">State-conditioned</span> contact coverage guides exploration toward novel <span class="highlight-term">finger–object</span> contacts.</p>
           </article>
           <article class="research-highlight">
-            <span class="highlight-number" aria-hidden="true">02</span>
             <h3>Diverse manipulation tasks</h3>
             <p>Evaluated on object singulation, retrieval, <span class="highlight-term">in-hand</span> reorientation, and bimanual manipulation.</p>
           </article>
           <article class="research-highlight">
-            <span class="highlight-number" aria-hidden="true">03</span>
             <h3>Sim-to-real transfer</h3>
             <p>A <span class="highlight-term">vision-based</span> policy distilled from simulation performs <span class="highlight-term">real-world</span> <span class="highlight-term">object singulation.</span></p>
           </article>
@@ -257,7 +228,7 @@
 
 <section class="section paper-section" id="sim" aria-labelledby="sim-title">
   <div class="container is-max-widescreen">
-    <h2 class="section-heading" id="sim-title"><span class="section-number" aria-hidden="true">02</span>Simulation Tasks</h2>
+    <h2 class="section-heading" id="sim-title">Simulation Tasks</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="simulation-mosaic">
@@ -335,7 +306,7 @@
 
 <section class="section paper-section real-world-section" id="real" aria-labelledby="real-title">
   <div class="container is-max-widescreen">
-    <h2 class="section-heading" id="real-title"><span class="section-number" aria-hidden="true">03</span>Real-World Results</h2>
+    <h2 class="section-heading" id="real-title">Real-World Results</h2>
     <p class="real-world-subtitle has-text-centered">
       We distill the simulation oracle policy into a vision-based policy and evaluate real-world object singulation with randomized target objects. Videos are shown at 1x speed.
     </p>
@@ -382,7 +353,7 @@
 
 <section class="section paper-section" id="abstract" aria-labelledby="abstract-title">
   <div class="container is-max-widescreen">
-    <h2 class="section-heading" id="abstract-title"><span class="section-number" aria-hidden="true">04</span>Abstract</h2>
+    <h2 class="section-heading" id="abstract-title">Abstract</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths has-text-justified is-hidden-mobile">
         <p class="content">
@@ -404,7 +375,7 @@
   <div class="container is-max-widescreen">
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-        <h2 class="section-heading" id="method-title"><span class="section-number" aria-hidden="true">05</span>Method</h2>
+        <h2 class="section-heading" id="method-title">Method</h2>
 
         <div class="content">
           <p>
@@ -489,15 +460,15 @@
         </figure>
 
         <div class="content method-explanation">
-          <h3 class="method-step-title" id="method-contact">01 · Contact Events</h3>
+          <h3 class="method-step-title" id="method-contact">Contact Events</h3>
           <p>
             We partition the object surface into regions using point positions and surface normals, and represent each finger with sparse surface keypoints. A distance–force criterion detects contact between a finger and an object region. This gives a concrete unit of exploration: a <strong>finger–region pair</strong>, rather than proximity to the object alone.
           </p>
-          <h3 class="method-step-title" id="method-memory">02 · State-Conditioned Contact Counts</h3>
+          <h3 class="method-step-title" id="method-memory">State-Conditioned Contact Counts</h3>
           <p>
             The same contact may be useful again when the object configuration or goal changes. We therefore encode point clouds of the <strong>current and goal object poses</strong> with an autoencoder, then use SimHash to assign a discrete state cluster. A counter records how often each finger–region pair has been contacted within that cluster. These counts persist across training episodes; rarely visited pairs receive higher novelty weights, while repeated contacts contribute less.
           </p>
-          <h3 class="method-step-title" id="method-rewards">03 · Exploration Rewards</h3>
+          <h3 class="method-step-title" id="method-rewards">Exploration Rewards</h3>
           <p>
             <strong>Before contact:</strong> the energy-based reaching score combines the same novelty weights with a distance-based kernel over object surface points. Nearby, under-explored regions contribute more, providing continuous guidance toward new interactions even while the hand is in free space.
           </p>
@@ -525,7 +496,7 @@
 
 <section class="section paper-section" id="experiment" aria-labelledby="experiment-title">
   <div class="container is-max-widescreen">
-    <h2 class="section-heading" id="experiment-title"><span class="section-number" aria-hidden="true">06</span>Experimental Results</h2>
+    <h2 class="section-heading" id="experiment-title">Experimental Results</h2>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="publication-video">
@@ -552,7 +523,7 @@
 
 <section class="section paper-section" id="bibtex" aria-labelledby="bibtex-title">
   <div class="container is-max-widescreen">
-    <h2 class="section-heading" id="bibtex-title"><span class="section-number" aria-hidden="true">07</span>BibTeX</h2>
+    <h2 class="section-heading" id="bibtex-title">BibTeX</h2>
     <div class="citation-box">
       <button class="citation-copy" type="button" aria-label="Copy BibTeX" aria-controls="bibtex-code" hidden>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
