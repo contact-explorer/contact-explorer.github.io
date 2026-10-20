@@ -514,6 +514,30 @@ body {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 10px 28px rgba(0, 0, 0, 0.10);
 }
 
+.hero-resource-links .external-link.resource-mjlab {
+  background: #eaf2ff;
+  border-color: #d5e3f9;
+  color: #265ea8;
+}
+
+.hero-resource-links .external-link.resource-mjlab:hover {
+  background: #dceaff;
+  border-color: #bdd2f3;
+  color: #204f8e;
+}
+
+.hero-resource-links .external-link.resource-isaacgym {
+  background: #eaf5ec;
+  border-color: #d4e8d9;
+  color: #2e7048;
+}
+
+.hero-resource-links .external-link.resource-isaacgym:hover {
+  background: #dceddf;
+  border-color: #bcdac4;
+  color: #255c3b;
+}
+
 .hero-resource-links .external-link:focus-visible {
   outline: 2px solid #2e72d6;
   outline-offset: 3px;
@@ -521,7 +545,7 @@ body {
 
 @media (max-width: 600px) {
   .hero-resource-links .publication-links { gap: 0.25rem 0.5rem; }
-  .hero-resource-links .external-link { padding-inline: 0.875rem; }
+  .hero-resource-links .external-link { padding-inline: 0.75rem; }
 }
 
 .section > .container > .title,
